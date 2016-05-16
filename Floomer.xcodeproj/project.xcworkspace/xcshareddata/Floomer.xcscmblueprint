@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BB0D92ED80FC00C982B76FA96321CF32098712AE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2B8A4903DDD8333B63FF6DBAD81234F77A7F4A11" : 0,
+    "BB0D92ED80FC00C982B76FA96321CF32098712AE" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "69F0E5DD-E655-4682-BBF7-CDA9C0AF73A8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2B8A4903DDD8333B63FF6DBAD81234F77A7F4A11" : "Floomer\/Floomer\/",
+    "BB0D92ED80FC00C982B76FA96321CF32098712AE" : "Floomer\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Floomer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Floomer.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ungerfalt\/Floomer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2B8A4903DDD8333B63FF6DBAD81234F77A7F4A11"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ungerfalt\/Floomer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BB0D92ED80FC00C982B76FA96321CF32098712AE"
+    }
+  ]
+}
