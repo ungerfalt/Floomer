@@ -13,16 +13,14 @@ import AVFoundation
 
 class GameOver: SKScene {
     
-    var bgColor = UIColor(red: 163.0/255.0, green: 188.0/255.0, blue: 137.0/255.0, alpha: 1.0)
+    var bgColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
     var textColor = UIColor(red: 163.0/255.0, green: 188.0/255.0, blue: 137.0/255.0, alpha: 1.0)
     
     var replayButton = UIButton()
     var replayButtonImage = UIImage(named: "ReplayButton") as UIImage!
-    
-    var textLabel = UILabel()
+
     var scoreLabel = UILabel()
-    var scoreLabelImage = UIImage(named: "ScoreBG") as UIImage!
-    var scoreLabelImageView = UIImageView()
+    var headLine = UILabel()
     
     var gameOverSceneAudioPlayer = AVAudioPlayer()
     var gameOverSceneSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("firstblood", ofType: "mp3")!)
@@ -34,7 +32,7 @@ class GameOver: SKScene {
         // Create the replay button
         self.replayButton = UIButton(type: UIButtonType.Custom)
         self.replayButton.setImage(replayButtonImage, forState: .Normal)
-        self.replayButton.frame = CGRectMake(self.frame.size.width / 2, self.frame.size.height / 2, 80, 80)
+        self.replayButton.frame = CGRectMake(self.frame.size.width / 2, 500, 120, 120)
         self.replayButton.layer.anchorPoint = CGPointMake(1.0, 1.0)
         self.replayButton.layer.zPosition = 0
         
@@ -44,27 +42,30 @@ class GameOver: SKScene {
             view.addSubview(self.replayButton)
         }
         
-        self.textLabel = UILabel(frame: CGRectMake(self.frame.size.width / 2, 200, 120, 60))
-        self.textLabel.text = "Score:"
-        self.textLabel.layer.zPosition = 0
+        self.headLine = UILabel(frame: CGRectMake(self.frame.size.width / 2, 100, 300, 100))
+        self.headLine.textAlignment = NSTextAlignment.Center
+        self.headLine.textColor = textColor
+        self.headLine.text = "HIGHSCORE"
+        self.headLine.font = UIFont(name: "HighscoreHero", size: 35)
+        self.headLine.layer.anchorPoint = CGPointMake(1.0, 1.0)
+        self.headLine.layer.zPosition = 1
+        
+        delay(0.5) {
+            
+            view.addSubview(self.headLine)
+        }
         // Label to hold the player current score
-        self.scoreLabel = UILabel(frame: CGRectMake(self.frame.size.width / 2, 200, 120, 120))
+        self.scoreLabel = UILabel(frame: CGRectMake(self.frame.size.width / 2, 250, 200, 200))
         self.scoreLabel.textAlignment = NSTextAlignment.Center
         self.scoreLabel.textColor = textColor
-        self.scoreLabel.text = "\(kScore)"
-        self.scoreLabel.font = UIFont(name: (scoreLabel.font?.fontName)!, size: 45)
+        self.scoreLabel.text = "Score: \(kScore)"
+        self.scoreLabel.font = UIFont(name: "HighscoreHero", size: 20)
         self.scoreLabel.layer.anchorPoint = CGPointMake(1.0, 1.0)
         self.scoreLabel.layer.zPosition = 1
         
-        // Set background image for the score label
-        self.scoreLabelImageView = UIImageView(image: scoreLabelImage!)
-        self.scoreLabelImageView.frame = CGRectMake(self.frame.size.width / 2, 200, 120, 120)
-        self.scoreLabelImageView.layer.anchorPoint = CGPointMake(1.0, 1.0)
-        self.scoreLabelImageView.layer.zPosition = 0
         delay(0.5) {
             
             view.addSubview(self.scoreLabel)
-            view.addSubview(self.scoreLabelImageView)
         }
         
         delay(0.5) {
@@ -105,10 +106,8 @@ class GameOver: SKScene {
         
         // Removes the scorelabel from the view
         scoreLabel.removeFromSuperview()
-        
-        // Removes the scoreLabelImageView from the view
-        scoreLabelImageView.removeFromSuperview()
-        
+        headLine.removeFromSuperview()
+  
         // Removes the replaybutton from the view
         replayButton.removeFromSuperview()
         

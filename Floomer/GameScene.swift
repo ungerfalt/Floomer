@@ -23,13 +23,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let movingBackgroundTexture = SKTexture(imageNamed: "MovingBackground")
     let movingMidGroundTexture = SKTexture(imageNamed: "movingMidGround")
     let movingForgroundTexture = SKTexture(imageNamed: "movingForground")
-    let pipe1Texture = SKTexture(imageNamed: "Pipe1")
-    let pipe2Texture = SKTexture(imageNamed: "Pipe2")
+    let pipe1Texture = SKTexture(imageNamed: "SkyScraper2")
+    let pipe2Texture = SKTexture(imageNamed: "SkyScraper1")
     let movingPlaneTexture = SKTexture(imageNamed: "Plane1")
-    let modelTexture = SKTexture(imageNamed: "Plane1")
+    let modelTexture = SKTexture(imageNamed: "Plane2")
     
-    
-    var spaceColor = UIColor(red: 133.0/255.0, green: 197.0/255.0, blue: 207.0/255.0, alpha: 1.0)
+
+    var spaceColor = UIColor(red: 201/255.0, green: 129/255.0, blue: 200/255.0, alpha: 1.0)
     
     var moving = SKNode()
     var pipePair = SKNode()
@@ -54,9 +54,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameSceneSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("bgMusic64", ofType: "mp3")!)
     var gameSceneEffectAudioPlayer = AVAudioPlayer()
     var gameSceneEffectSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("fail", ofType: "mp3")!)
+    var gameSceneEngineAudioPlayer = AVAudioPlayer()
+    var gameSceneEngineSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("oldEngine", ofType: "mp3")!)
     
     
     override func didMoveToView(view: SKView) {
+        
+            //Adding smoke to the plane
+            let smoke = SKEmitterNode(fileNamed: "MyParticle")
+            smoke!.position = CGPoint(x: 200, y: 200)
+            smoke?.hidden = false
+            addChild(smoke!)
+            plane?.addChild(smoke!)
         
             addChild(moving)
         
@@ -122,12 +131,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(skyLimit)
         
         score = 0
-        scoreLabelNode.fontName = "Helvetica"
-        scoreLabelNode.position = CGPointMake(self.frame.size.width / 1.2, self.frame.size.height / 1.2)
-        scoreLabelNode.fontColor = UIColor.darkGrayColor()
+        scoreLabelNode.fontName = "HighscoreHero"
+        scoreLabelNode.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 1.2)
+        scoreLabelNode.fontColor = UIColor.blackColor()
         scoreLabelNode.zPosition = 1
-        scoreLabelNode.text = "\(score)"
-        scoreLabelNode.fontSize = 65
+        scoreLabelNode.text = "SCORE: \(score)"
+        scoreLabelNode.fontSize = 36
         self.addChild(scoreLabelNode)
         
     }
@@ -166,7 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 kScore = score
                 
                 // Update the ScoreLabelNode in the scene to display the users current score
-                scoreLabelNode.text = "\(score)"
+                scoreLabelNode.text = "SCORE: \(score)"
                 
             } else {
                 moving.speed = 0
@@ -176,8 +185,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let slowDownSequence = SKAction.sequence([rotatePlane,stopPlane])
                 plane.runAction(slowDownSequence)
                 gameSceneAudioPlayer.stop()
+                gameSceneEngineAudioPlayer.stop()
                 playGameOverEffectAudio()
-                delay(0.5) {
+                delay(1) {
                     
                     self.gameOver()
                 }
@@ -197,6 +207,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(plane)
             plane.begin()
             playGameSceneAudio()
+            playGameSceneEngineAudio()
         }
     }
     
@@ -217,8 +228,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pipe1.physicsBody?.contactTestBitMask = planeCategory
         pipePair.addChild(pipe1)
         
-        let maxGap = UInt(self.frame.height / 5)
-        let minGap = UInt32(self.frame.height / 8)
+        let maxGap = UInt(self.frame.height / 4)
+        let minGap = UInt32(self.frame.height / 6)
         let gap = UInt(arc4random_uniform(minGap)) + maxGap
         
         let pipe2 = SKSpriteNode(texture: pipe2Texture)
@@ -275,6 +286,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameSceneAudioPlayer.prepareToPlay()
         gameSceneAudioPlayer.numberOfLoops = -1
         gameSceneAudioPlayer.play()
+        
+    }
+    
+    func playGameSceneEngineAudio() {
+        
+        // Setting up the audioplayer for game scene audio
+        do {
+            try gameSceneEngineAudioPlayer = AVAudioPlayer(contentsOfURL:
+                gameSceneEngineSound)
+        } catch {
+            print("GameScene. gameSceneAudioPlayer is not available")
+        }
+        gameSceneEngineAudioPlayer.prepareToPlay()
+        gameSceneEngineAudioPlayer.numberOfLoops = -1
+        gameSceneEngineAudioPlayer.play()
         
     }
     

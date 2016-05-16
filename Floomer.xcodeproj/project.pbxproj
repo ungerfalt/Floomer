@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7FD0DA681CEA556300A2566C /* oldEngine.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7FD0DA671CEA556300A2566C /* oldEngine.mp3 */; };
+		7FD0DA6A1CEA556F00A2566C /* engine.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7FD0DA691CEA556F00A2566C /* engine.wav */; };
+		7FD0DA6C1CEA70B200A2566C /* HighscoreHero.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FD0DA6B1CEA6EA700A2566C /* HighscoreHero.ttf */; };
+		7FD0DA6F1CEA7B4300A2566C /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7FD0DA6D1CEA7B4300A2566C /* MyParticle.sks */; };
+		7FD0DA701CEA7B4300A2566C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD0DA6E1CEA7B4300A2566C /* spark.png */; };
 		7FE7F3E81CE70AB9004CAC48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE7F3E71CE70AB9004CAC48 /* AppDelegate.swift */; };
 		7FE7F3EA1CE70AB9004CAC48 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7FE7F3E91CE70AB9004CAC48 /* GameScene.sks */; };
 		7FE7F3EC1CE70AB9004CAC48 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE7F3EB1CE70AB9004CAC48 /* GameScene.swift */; };
@@ -29,6 +34,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7FD0DA671CEA556300A2566C /* oldEngine.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oldEngine.mp3; sourceTree = "<group>"; };
+		7FD0DA691CEA556F00A2566C /* engine.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = engine.wav; sourceTree = "<group>"; };
+		7FD0DA6B1CEA6EA700A2566C /* HighscoreHero.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HighscoreHero.ttf; sourceTree = "<group>"; };
+		7FD0DA6D1CEA7B4300A2566C /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
+		7FD0DA6E1CEA7B4300A2566C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		7FE7F3E41CE70AB9004CAC48 /* Floomer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Floomer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FE7F3E71CE70AB9004CAC48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FE7F3E91CE70AB9004CAC48 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -84,9 +94,12 @@
 			children = (
 				7FE7F40D1CE92F80004CAC48 /* Audio */,
 				7FE7F3E71CE70AB9004CAC48 /* AppDelegate.swift */,
+				7FD0DA6D1CEA7B4300A2566C /* MyParticle.sks */,
+				7FD0DA6E1CEA7B4300A2566C /* spark.png */,
 				7FE7F3E91CE70AB9004CAC48 /* GameScene.sks */,
 				7FE7F3EB1CE70AB9004CAC48 /* GameScene.swift */,
 				7FE7F4051CE8AE55004CAC48 /* MovingForground.swift */,
+				7FD0DA6B1CEA6EA700A2566C /* HighscoreHero.ttf */,
 				7FE7F3FD1CE70F0C004CAC48 /* GameOver.swift */,
 				7FE7F40B1CE9148A004CAC48 /* Constants.swift */,
 				7FE7F3ED1CE70AB9004CAC48 /* GameViewController.swift */,
@@ -106,6 +119,8 @@
 		7FE7F40D1CE92F80004CAC48 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				7FD0DA691CEA556F00A2566C /* engine.wav */,
+				7FD0DA671CEA556300A2566C /* oldEngine.mp3 */,
 				7FE7F4141CE92FE0004CAC48 /* fail.mp3 */,
 				7FE7F4121CE92FCA004CAC48 /* bgMusic.mp3 */,
 				7FE7F4101CE92FBB004CAC48 /* firstblood.mp3 */,
@@ -173,11 +188,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FD0DA6C1CEA70B200A2566C /* HighscoreHero.ttf in Resources */,
 				7FE7F4111CE92FBB004CAC48 /* firstblood.mp3 in Resources */,
 				7FE7F40F1CE92FB1004CAC48 /* bgMusic64.mp3 in Resources */,
 				7FE7F4151CE92FE0004CAC48 /* fail.mp3 in Resources */,
 				7FE7F4131CE92FCA004CAC48 /* bgMusic.mp3 in Resources */,
+				7FD0DA701CEA7B4300A2566C /* spark.png in Resources */,
 				7FE7F3EA1CE70AB9004CAC48 /* GameScene.sks in Resources */,
+				7FD0DA681CEA556300A2566C /* oldEngine.mp3 in Resources */,
+				7FD0DA6F1CEA7B4300A2566C /* MyParticle.sks in Resources */,
+				7FD0DA6A1CEA556F00A2566C /* engine.wav in Resources */,
 				7FE7F3F61CE70AB9004CAC48 /* LaunchScreen.storyboard in Resources */,
 				7FE7F3F31CE70AB9004CAC48 /* Assets.xcassets in Resources */,
 				7FE7F3F11CE70AB9004CAC48 /* Main.storyboard in Resources */,
@@ -312,7 +332,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Floomer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CDU.Floomer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -323,7 +345,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Floomer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CDU.Floomer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -349,6 +373,7 @@
 				7FE7F3FC1CE70AB9004CAC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

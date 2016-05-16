@@ -26,7 +26,7 @@ class Plane : SKSpriteNode {
     
     func begin() {
         
-        let animation = SKAction.animateWithTextures([MovingPlane1Texture, MovingPlane2Texture], timePerFrame: 0.1)
+        let animation = SKAction.animateWithTextures([MovingPlane1Texture, MovingPlane2Texture], timePerFrame: 0.3)
         runAction(SKAction.repeatActionForever(animation))
         
     }
