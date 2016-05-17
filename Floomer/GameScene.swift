@@ -10,6 +10,10 @@ import SpriteKit
 import UIKit
 import AVFoundation
 
+var score: Int = 0
+var scoreKeeper: Int = 0
+var planeSpeed: CGFloat = 0.004
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var movingGround : MovingGround!
@@ -30,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
 
     var spaceColor = UIColor(red: 201/255.0, green: 129/255.0, blue: 200/255.0, alpha: 1.0)
-    
+    var distanceToMove = CGFloat()
     var moving = SKNode()
     var pipePair = SKNode()
     var pipes = SKNode()
@@ -38,7 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var skyLimit = SKNode()
     
     var alreadyAddedToTheScene = Bool()
-    
+    var movePipes = SKAction()
     var movePipesAndRemove = SKAction()
     var spawnThenDelayForever = SKAction()
     
@@ -47,8 +51,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let pipeCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
     
-    var score = NSInteger()
+    
     var scoreLabelNode = SKLabelNode()
+    
     
     var gameSceneAudioPlayer = AVAudioPlayer()
     var gameSceneSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("bgMusic64", ofType: "mp3")!)
@@ -60,12 +65,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         
-            //Adding smoke to the plane
-            let smoke = SKEmitterNode(fileNamed: "MyParticle")
-            smoke!.position = CGPoint(x: 200, y: 200)
-            smoke?.hidden = false
-            addChild(smoke!)
-            plane?.addChild(smoke!)
         
             addChild(moving)
         
@@ -90,9 +89,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
             moving.addChild(pipes)
         
-            let distanceToMove = CGFloat(self.frame.size.width + 5.0 * pipe1Texture.size().width)
+            distanceToMove = CGFloat(self.frame.size.width + 5.0 * pipe1Texture.size().width)
         
-            let movePipes = SKAction.moveByX(-distanceToMove, y: 0.0, duration: NSTimeInterval(0.004 * distanceToMove))
+            moveScyScrapers(planeSpeed)
         
             let removePipes = SKAction.removeFromParent()
         
@@ -110,12 +109,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         plane = Plane(size: CGSizeMake(movingPlaneTexture.size().width, movingPlaneTexture.size().height))
         plane.position = CGPoint(x: self.frame.size.width / 2.8, y: self.frame.size.height / 2)
         
-        plane.physicsBody = SKPhysicsBody(circleOfRadius: plane.size.height / 2)
+        plane.physicsBody = SKPhysicsBody(circleOfRadius:
+            plane.size.height / 4)
         plane.physicsBody?.dynamic = true
         plane.physicsBody?.allowsRotation = false
         plane.physicsBody?.categoryBitMask = planeCategory
         plane.physicsBody?.collisionBitMask = worldCategory | pipeCategory
         plane.physicsBody?.contactTestBitMask = worldCategory | pipeCategory
+        
+        //Adding smoke to the plane
+        let smoke = SKEmitterNode(fileNamed: "MySmokeParticle")
+        smoke?.position.x = -25;
+        smoke?.hidden = false
+        plane!.addChild(smoke!)
         
         groundLevel.position = CGPointMake(self.frame.width / 2, movingGroundTexture.size().height / 2)
         groundLevel.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, movingGroundTexture.size().height))
@@ -145,13 +151,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
+        
+        
             addStuffToTheScene()
             alreadyAddedToTheScene = true
         
         if(moving.speed > 0) {
             
             plane.physicsBody?.velocity = CGVectorMake(0, 0)
-            plane.physicsBody?.applyImpulse(CGVectorMake(0, 18))
+            plane.physicsBody?.applyImpulse(CGVectorMake(0, 5))
         }
           }
    
@@ -170,6 +178,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 // Increments the score
                 score++
+                scoreKeeper++
+                if(scoreKeeper >= 10) {
+                    planeSpeed -= 0.0005
+                moveScyScrapers(planeSpeed)
+                scoreKeeper = 0
+                }
                 
                 // Saving the score to be used the the Game Over scene
                 kScore = score
@@ -187,7 +201,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameSceneAudioPlayer.stop()
                 gameSceneEngineAudioPlayer.stop()
                 playGameOverEffectAudio()
-                delay(1) {
+                delay(2) {
                     
                     self.gameOver()
                 }
@@ -198,7 +212,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addStuffToTheScene() {
         
         if(alreadyAddedToTheScene == false) {
-            movingGround.begin()
+            movingGround.begin(0.004)
             movingBackground.begin()
             movingMidGround.begin()
             movingForground.begin()
@@ -219,10 +233,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let height = UInt(self.frame.height / 3 )
         let y = UInt(arc4random()) % height
-        let pipe1 = SKSpriteNode(texture: pipe1Texture)
+        let pipe1 = SKSpriteNode(texture: pipe2Texture)
         
         pipe1.position = CGPointMake(0.0, CGFloat(y))
-        pipe1.physicsBody = SKPhysicsBody(rectangleOfSize: pipe1.size)
+        pipe1.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize( width: pipe1.size.width / 2, height: pipe1.size.height - 35))
         pipe1.physicsBody?.dynamic = false
         pipe1.physicsBody?.categoryBitMask = pipeCategory
         pipe1.physicsBody?.contactTestBitMask = planeCategory
@@ -234,7 +248,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let pipe2 = SKSpriteNode(texture: pipe2Texture)
         pipe2.position = CGPointMake(0.0, CGFloat(y) + pipe2.size.height + CGFloat(gap))
-        pipe2.physicsBody = SKPhysicsBody(rectangleOfSize: pipe2.size)
+        pipe2.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize( width: pipe2.size.width / 2, height: pipe2.size.height - 35))
         pipe2.physicsBody?.dynamic = false
         pipe2.physicsBody?.categoryBitMask = pipeCategory
         pipe2.physicsBody?.contactTestBitMask = planeCategory
@@ -339,7 +353,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Presenting the new scene with a transition effect
         skView.presentScene(scene, transition: transition)
+    }
+    
+    func moveScyScrapers (moveSpeed: CGFloat) {
         
+        movePipes = SKAction.moveByX(-distanceToMove, y: 0.0, duration: NSTimeInterval(moveSpeed * distanceToMove))
+        
+        let removePipes = SKAction.removeFromParent()
+        movePipesAndRemove = SKAction.sequence([movePipes, removePipes])
+        pipePair.runAction(movePipesAndRemove)
         
     }
 }

@@ -13,6 +13,7 @@ class MovingGround : SKSpriteNode {
     
     let MovingGroundTexture = SKTexture(imageNamed : "MovingGround")
     let myColor = UIColor(red: 150, green: 105, blue: 123, alpha: 1.0)
+    var groundSpeed = Double()
     
     init(size: CGSize) {
         super.init(texture: nil, color: UIColor(), size: CGSizeMake(size.width, size.height))
@@ -34,8 +35,8 @@ class MovingGround : SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func begin() {
-        let movingGroundSprite = SKAction.moveByX(-MovingGroundTexture.size().width, y: 0, duration: NSTimeInterval(0.004*MovingGroundTexture.size().width))
+    func begin(speed : CGFloat) {
+        let movingGroundSprite = SKAction.moveByX(-MovingGroundTexture.size().width, y: 0, duration: NSTimeInterval(speed * MovingGroundTexture.size().width))
         let resetGroundSprite = SKAction.moveByX(MovingGroundTexture.size().width, y: 0, duration: 0.0)
         let moveSequence = SKAction.sequence([movingGroundSprite, resetGroundSprite])
         runAction(SKAction.repeatActionForever(moveSequence))
